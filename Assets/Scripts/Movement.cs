@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    public float Jumpforce;
+    public float speed;
     private Rigidbody2D body;
     bool isgrounded;
+    public float groundRayLength;
+    public LayerMask layers;
 
     private void Awake()
     {
@@ -15,6 +18,9 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
+        isgrounded = Physics2D.Raycast(transform.position, -transform.up, groundRayLength, layers);
+        Debug.DrawRay(transform.position, -transform.up * groundRayLength);
+
         float horizontalInput = Input.GetAxis("Horizontal");
         body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
 
@@ -24,7 +30,9 @@ public class Movement : MonoBehaviour
         else if (horizontalInput < 0.01f)
             transform.localScale = new Vector3(-3,3,3);
 
-        if (Input.GetKey(KeyCode.Space))
-            body.velocity = new Vector2(body.velocity.x, speed);
+        if (Input.GetButtonDown("Jump") && isgrounded)
+            body.AddForce(Vector2.up * Jumpforce);
+
+       
     }
 }
