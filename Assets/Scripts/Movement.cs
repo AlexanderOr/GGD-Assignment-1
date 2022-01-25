@@ -26,9 +26,9 @@ public class Movement : MonoBehaviour
 
         //flips character when moving left and right
         if (horizontalInput > 0.01f)
-            transform.localScale = new Vector3(3,3,3);
+            transform.localScale = new Vector3(7,7,7);
         else if (horizontalInput < 0.01f)
-            transform.localScale = new Vector3(-3,3,3);
+            transform.localScale = new Vector3(-7,7,7);
 
         if (Input.GetButtonDown("Jump") && isgrounded)
             body.AddForce(Vector2.up * Jumpforce);
