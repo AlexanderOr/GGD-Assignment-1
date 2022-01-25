@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Killzone
   - Sword
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Background
   - Water
   - UI
   - 
@@ -40,6 +41,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: player
+    uniqueID: 3119627911
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: enviornment
+    uniqueID: 3505862703
     locked: 0

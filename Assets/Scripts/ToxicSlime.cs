@@ -5,26 +5,37 @@ using UnityEngine.SceneManagement;
 
 public class ToxicSlime : MonoBehaviour
 {
+    private bool Stance;
     public SpriteRenderer spriteRenderer;
+    public Sprite newSprite;
+    public float restartDelay = .1f;
 
-    private void OnTriggerEnter(Collider col)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(spriteRenderer = spriteRenderer )
-        {
 
+
+        if (collision.gameObject.tag == "Sword")
+        {
+            Destroy(collision.gameObject);
+            spriteRenderer.sprite = newSprite;
+            Stance = true;
         }
 
-        else if (col.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy" && Stance == true)
         {
-            Destroy(this.gameObject);
+            Destroy(collision.gameObject);
+            Stance = false;
+        }
+        else if (Stance == false)
+        {
+            Invoke("RestartLevel", restartDelay);
+
+
         }
     }
-        //Destroy() is the base function for destroying components and objects in a scene
-        //you need to specify that you are referring to a game object
-        //Destroy(this), for instance, will destroy the component, not the object 
-        //Destroy(this.gameObject) will destroy the object where this component is
-
-
-        //Destroy(other.gameObject);
-        
+    void RestartLevel() //Restarts the level
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+}
